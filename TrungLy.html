@@ -3,20 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trần Trung Lý - Kỹ Sư Điện Tàu Thủy & Chuyên Gia Buồng Lái</title>
+    <title>Nguyễn Trung Lý - Kỹ Sư Điện Tàu Thủy & Chuyên Gia Buồng Lái</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light background */
-            color: #334155; /* Darker text for readability */
+            background-color: hsl(210, 20%, 98%); /* Very light blue-gray background */
+            color: hsl(210, 20%, 20%); /* Dark gray text for readability */
+            /* Subtle background pattern for texture */
+            background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='hsl(210, 10%, 70%)' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 0h3v3H0V0zm3 3h3v3H3V3z'/%3E%3C/g%3E%3C/svg%3E");
         }
-        /* Custom gradient for hero section */
-        .hero-gradient {
-            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+
+        /* Custom background image for hero section */
+        .hero-background {
+            background-image: url('anh1.jpg'); /* Set background image */
+            background-size: cover; /* Cover the entire area */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            position: relative; /* Needed for overlay */
+            overflow: hidden; /* Hide overflow for rounded corners */
+        }
+        .hero-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Darker gradient overlay for text readability and premium feel */
+            background: linear-gradient(135deg, rgba(26, 32, 44, 0.7) 0%, rgba(45, 55, 72, 0.8) 100%);
+            z-index: 1;
+        }
+        .hero-background > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Scroll-reveal animations for sections */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Delay for sequential animations within expertise cards */
+        .expertise-card-reveal:nth-child(1) { transition-delay: 0s; }
+        .expertise-card-reveal:nth-child(2) { transition-delay: 0.15s; }
+        .expertise-card-reveal:nth-child(3) { transition-delay: 0.3s; }
+        .expertise-card-reveal:nth-child(4) { transition-delay: 0.45s; }
+
+        /* Keyframe animation for hero text */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title-animate {
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.2s; /* Delay for title */
+        }
+
+        .hero-subtitle-animate {
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.4s; /* Delay for subtitle */
+        }
+
+        .hero-button-animate {
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 0.6s; /* Delay for button */
+        }
+
+        /* Animated underline for section titles */
+        .animated-underline {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem; /* Space for the underline */
+        }
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 0;
+            height: 3px;
+            background-color: hsl(210, 80%, 50%); /* Blue underline */
+            transition: width 0.6s ease-out, left 0.6s ease-out;
+            transform: translateX(-50%);
+            opacity: 0;
+        }
+        .reveal-item.visible .animated-underline::after {
+            width: 100%;
+            opacity: 1;
         }
     </style>
 </head>
@@ -24,15 +113,15 @@
     <div class="min-h-screen flex flex-col">
 
         <!-- Header/Hero Section -->
-        <header class="hero-gradient text-white py-20 px-4 sm:px-6 lg:px-8 rounded-b-3xl shadow-lg">
+        <header class="hero-background text-white py-20 px-4 sm:px-6 lg:px-8 rounded-b-3xl shadow-lg">
             <div class="max-w-6xl mx-auto text-center">
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight">
-                    Trần Trung Lý
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-4 leading-tight hero-title-animate">
+                    Nguyễn Trung Lý
                 </h1>
-                <p class="text-xl sm:text-2xl lg:text-3xl font-light mb-6">
+                <p class="text-xl sm:text-2xl lg:text-3xl font-light mb-6 hero-subtitle-animate">
                     Kỹ Sư Vận Hành Điện Tàu Thủy & Chuyên Gia Lĩnh Vực Điện Trên Buồng Lái
                 </p>
-                <div class="mt-8">
+                <div class="mt-8 hero-button-animate">
                     <a href="#about" class="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
                         Tìm hiểu thêm
                     </a>
@@ -44,51 +133,59 @@
         <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
             <!-- About Section -->
-            <section id="about" class="bg-white p-8 rounded-2xl shadow-xl mb-12">
+            <section id="about" class="bg-white p-8 rounded-2xl shadow-xl mb-12 reveal-item">
                 <div class="flex flex-col md:flex-row items-center md:items-start space-y-8 md:space-y-0 md:space-x-12">
                     <div class="w-full md:w-1/3 flex justify-center">
                         <!-- Image for Mr. Ly, assuming 'anh.jpg' will be in the same directory on GitHub -->
-                        <img src="anh.jpg" alt="Ảnh chân dung Trần Trung Lý" class="rounded-full shadow-lg border-4 border-blue-200">
+                        <img src="anh.jpg" alt="Ảnh chân dung Nguyễn Trung Lý" class="rounded-full shadow-lg border-4 border-blue-200">
                     </div>
                     <div class="w-full md:w-2/3 text-center md:text-left">
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">Về Anh Trần Trung Lý</h2>
-                        <p class="text-lg text-gray-700 leading-relaxed mb-4">
-                            Anh Trần Trung Lý là một **Kỹ sư vận hành điện tàu thủy** tận tâm và đầy nhiệt huyết. Với nhiều năm kinh nghiệm thực chiến trên các loại tàu khác nhau, anh đã tích lũy được kiến thức chuyên sâu và kỹ năng vượt trội trong việc quản lý, bảo trì, và khắc phục sự cố hệ thống điện phức tạp trên tàu.
+                        <h2 class="text-3xl font-bold text-gray-800 mb-4 animated-underline">Về Anh Nguyễn Trung Lý</h2>
+                        <p class="text-lg text-gray-700 leading-relaxed mb-4 mt-4">
+                            Anh Nguyễn Trung Lý là một **Kỹ sư vận hành điện tàu thủy** tận tâm và đầy nhiệt huyết. Với nhiều năm kinh nghiệm thực chiến trên các loại tàu khác nhau, anh đã tích lũy được kiến thức chuyên sâu và kỹ năng vượt trội trong việc quản lý, bảo trì, và khắc phục sự cố hệ thống điện phức tạp trên tàu.
                         </p>
                         <p class="text-lg text-gray-700 leading-relaxed">
-                            Không chỉ dừng lại ở việc vận hành, anh Lý còn là một **chuyên gia hàng đầu trong lĩnh vực điện trên buồng lái**. Anh am hiểu sâu sắc về các hệ thống điều khiển điện tử hiện đại, hệ thống tự động hóa, và các thiết bị định vị, thông tin liên lạc được tích hợp trên buồng lái. Khả năng phân tích và đưa ra giải pháp nhanh chóng, chính xác trong mọi tình huống là điểm mạnh nổi bật của anh, đảm bảo an toàn và hiệu quả cho mỗi hải trình.
+                            Không chỉ dừng lại ở việc vận hành, anh Lý còn là một **chuyên gia hàng đầu trong lĩnh vực điện trên buồng lái**. Anh am hiểu sâu sắc về các hệ thống điều khiển điện tử hiện đại, hệ thống tự động hóa, và các thiết bị định vị, thông tin liên lạc được tích hợp trên buồng lái. Khả năng phân tích và đưa ra giải pháp nhanh chóng, chính xác trong mọi tình huống là điểm mạnh nổi bật của anh, đảm bảo an toàn và hiệu quả cho mỗi mỗi hải trình.
                         </p>
                     </div>
                 </div>
             </section>
 
             <!-- Expertise Section -->
-            <section id="expertise" class="bg-white p-8 rounded-2xl shadow-xl mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Lĩnh Vực Chuyên Môn</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <section id="expertise" class="bg-white p-8 rounded-2xl shadow-xl mb-12 reveal-item">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center animated-underline">Lĩnh Vực Chuyên Môn</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4">
                     <!-- Card 1: Vận hành và bảo trì -->
-                    <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 expertise-card-reveal reveal-item flex flex-col items-center text-center">
+                        <!-- Icon: Bolt -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bolt text-blue-600 mb-4"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><path d="m12 3-7 4v8l7 4 7-4V7l-7-4z"></path></svg>
                         <h3 class="text-xl font-semibold text-blue-700 mb-3">Vận Hành & Bảo Trì Hệ Thống Điện</h3>
                         <p class="text-gray-600">
                             Đảm bảo toàn bộ hệ thống điện trên tàu, từ máy phát, tủ điện, đến hệ thống chiếu sáng và động cơ, hoạt động ổn định, hiệu quả và an toàn tuyệt đối.
                         </p>
                     </div>
                     <!-- Card 2: Xử lý sự cố -->
-                    <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 expertise-card-reveal reveal-item flex flex-col items-center text-center">
+                        <!-- Icon: Wrench -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wrench text-blue-600 mb-4"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
                         <h3 class="text-xl font-semibold text-blue-700 mb-3">Xử Lý Sự Cố Điện Nhanh Chóng</h3>
                         <p class="text-gray-600">
                             Khả năng chẩn đoán và khắc phục nhanh chóng mọi sự cố về điện, giảm thiểu thời gian ngừng hoạt động và đảm bảo an toàn cho tàu và thủy thủ đoàn.
                         </p>
                     </div>
                     <!-- Card 3: Chuyên gia buồng lái -->
-                    <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 expertise-card-reveal reveal-item flex flex-col items-center text-center">
+                        <!-- Icon: Compass or Navigation -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-compass text-blue-600 mb-4"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
                         <h3 class="text-xl font-semibold text-blue-700 mb-3">Điện Tử & Tự Động Hóa Buồng Lái</h3>
                         <p class="text-gray-600">
                             Thành thạo các hệ thống điện tử phức tạp như định vị (GPS, Radar), lái tự động, thông tin liên lạc (VHF, Satellite) và các thiết bị điều khiển khác trên buồng lái.
                         </p>
                     </div>
                     <!-- Card 4: Tư vấn & Đào tạo -->
-                    <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    <div class="bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 expertise-card-reveal reveal-item flex flex-col items-center text-center">
+                        <!-- Icon: Book or Graduation Cap -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open text-blue-600 mb-4"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
                         <h3 class="text-xl font-semibold text-blue-700 mb-3">Tư Vấn & Đào Tạo Chuyên Sâu</h3>
                         <p class="text-gray-600">
                             Cung cấp các giải pháp tối ưu, chia sẻ kiến thức và kinh nghiệm thực tế về điện tàu thủy cho các thủy thủ và kỹ thuật viên trẻ, góp phần nâng cao chất lượng nguồn nhân lực.
@@ -98,11 +195,11 @@
             </section>
 
             <!-- Vision & Commitment Section -->
-            <section id="vision" class="bg-white p-8 rounded-2xl shadow-xl mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Tầm Nhìn & Cam Kết</h2>
+            <section id="vision" class="bg-white p-8 rounded-2xl shadow-xl mb-12 reveal-item">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center animated-underline">Tầm Nhìn & Cam Kết</h2>
                 <div class="text-center max-w-3xl mx-auto">
-                    <p class="text-lg text-gray-700 leading-relaxed mb-4">
-                        Anh Trần Trung Lý luôn đặt sự an toàn, hiệu quả và độ tin cậy lên hàng đầu trong mọi công việc. Với tinh thần học hỏi không ngừng, cập nhật công nghệ mới và sự tận tâm với nghề, anh cam kết mang đến những giải pháp điện tàu thủy tối ưu nhất.
+                    <p class="text-lg text-gray-700 leading-relaxed mb-4 mt-4">
+                        Anh Nguyễn Trung Lý luôn đặt sự an toàn, hiệu quả và độ tin cậy lên hàng đầu trong mọi công việc. Với tinh thần học hỏi không ngừng, cập nhật công nghệ mới và sự tận tâm với nghề, anh cam kết mang đến những giải pháp điện tàu thủy tối ưu nhất.
                     </p>
                     <p class="text-lg text-gray-700 leading-relaxed italic">
                         "Với sự tỉ mỉ, chính xác và chuyên nghiệp, mọi hệ thống điện trên tàu sẽ luôn là 'ánh sáng' dẫn lối trên đại dương bao la, đảm bảo mỗi chuyến hải trình đều thành công và an toàn."
@@ -111,19 +208,19 @@
             </section>
 
             <!-- Contact Section -->
-            <section id="contact" class="bg-blue-700 text-white p-8 rounded-2xl shadow-xl">
-                <h2 class="text-3xl font-bold mb-6 text-center">Liên Hệ</h2>
+            <section id="contact" class="bg-blue-700 text-white p-8 rounded-2xl shadow-xl reveal-item">
+                <h2 class="text-3xl font-bold mb-6 text-center animated-underline">Liên Hệ</h2>
                 <div class="text-center max-w-2xl mx-auto">
-                    <p class="text-lg mb-6">
-                        Nếu quý vị có bất kỳ câu hỏi nào hoặc muốn tìm hiểu thêm về các dịch vụ và chuyên môn của anh Trần Trung Lý, đừng ngần ngại liên hệ với chúng tôi.
+                    <p class="text-lg mb-6 mt-4">
+                        Nếu quý vị có bất kỳ câu hỏi nào hoặc muốn tìm hiểu thêm về các dịch vụ và chuyên môn của anh Nguyễn Trung Lý, đừng ngần ngại liên hệ với chúng tôi.
                     </p>
-                    <p class="text-xl font-semibold mb-2">Email: <a href="mailto:nguyenvanyen.el@gmail.com" class="underline hover:text-blue-200">info@trantrungly.com</a></p>
+                    <p class="text-xl font-semibold mb-2">Email: <a href="mailto:info@nguyentrungly.com" class="underline hover:text-blue-200">info@nguyentrungly.com</a></p>
                     <p class="text-xl font-semibold">Điện thoại: <a href="tel:+84123456789" class="underline hover:text-blue-200">+84 123 456 789</a></p>
-                    <!-- Simple contact form placeholder -->
-                    <form class="mt-8 space-y-4">
-                        <input type="text" placeholder="Tên của bạn" class="w-full p-3 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                        <input type="email" placeholder="Email của bạn" class="w-full p-3 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300">
-                        <textarea placeholder="Nội dung tin nhắn" rows="5" class="w-full p-3 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300"></textarea>
+                    <!-- Contact form using mailto: -->
+                    <form action="mailto:info@nguyentrungly.com" method="post" enctype="text/plain" class="mt-8 space-y-4">
+                        <input type="text" name="name" placeholder="Tên của bạn" class="w-full p-3 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        <input type="email" name="email" placeholder="Email của bạn" class="w-full p-3 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        <textarea name="message" placeholder="Nội dung tin nhắn" rows="5" class="w-full p-3 rounded-lg bg-white text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300"></textarea>
                         <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
                             Gửi tin nhắn
                         </button>
@@ -136,11 +233,35 @@
         <!-- Footer -->
         <footer class="bg-gray-800 text-white py-8 px-4 sm:px-6 lg:px-8 mt-12 rounded-t-3xl shadow-inner">
             <div class="max-w-6xl mx-auto text-center">
-                <p>&copy; 2025 Trần Trung Lý. Mọi quyền được bảo lưu.</p>
+                <p>&copy; 2025 Nguyễn Trung Lý. Mọi quyền được bảo lưu.</p>
                 <p class="mt-2 text-sm">Thiết kế bởi một chuyên gia về điện và công nghệ.</p>
             </div>
         </footer>
 
     </div>
+
+    <script>
+        // JavaScript for scroll-reveal animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealElements = document.querySelectorAll('.reveal-item');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        // Optional: remove 'visible' class if you want elements to hide when scrolled out of view
+                        // entry.target.classList.remove('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the item is visible
+            });
+
+            revealElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>
